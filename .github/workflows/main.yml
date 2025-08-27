@@ -15,4 +15,4 @@ jobs:
   needs: build
   runs-on: ubuntu-latest
   steps:
-    - run: ${{ needs.build.outputs.FROM_BUILD }}
+    - run: echo ${{ needs.build.outputs.FROM_BUILD }}
