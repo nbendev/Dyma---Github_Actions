@@ -5,7 +5,7 @@ jobs:
  build: 
    runs-on: ubuntu-latest
    outputs:
-    FROM_BUILD: ${{ steps.step1.outpuits.FROM_STEP_1 }}
+    FROM_BUILD: ${{ steps.step1.outputs.FROM_STEP_1 }}
    steps:
      - id: step1
        run: |
