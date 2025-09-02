@@ -1,0 +1,14 @@
+name: Deployment staging
+on:
+    push:
+        branches: staging
+jobs:
+    deploy-staging:
+        runs-on: ubuntu-latest
+        environment:
+           name: staging
+           url: https://example.com
+        steps:
+             - run: |
+                echo "Deploying to prodstaginguction server..."
+                # Add your deployment commands here
