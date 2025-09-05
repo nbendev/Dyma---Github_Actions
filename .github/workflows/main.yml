@@ -2,23 +2,36 @@ name: Mon premier workflow
 on: [push]
 
 jobs:
-  testartifact:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo 123 > test.txt
+      - uses: actions/checkout@v4
+      - name: Install nodeJs
+        uses: actions/setup-node@v4
+      - name: init cache
+        uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-${{ hashFiles('./vite-project/package-lock.json') }}
+          path: ./vite-project/.npm
+      - name: Install dependencies
+        working-directory: ./vite-project
+        run: npm ci --cache .npm --prefer-offline
+      - name: Build application
+        working-directory: ./vite-project
+        run: npm run build
       - uses: actions/upload-artifact@v4
         with:
-          name: myfirstartifact
-          path: ./test.txt
-  downloadartifact:
-    needs: testartifact
+          name: build
+          path: ./vite-project/dist
+
+  deploy:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/upload-artifact@v4
         with:
-          name: myfirstartifact
-          path: ./ici
+          name: build
+          path: ./build
       - run: |
           ls
-          ls ./ici
-          cat ./ici/test.txt
+          ls build
