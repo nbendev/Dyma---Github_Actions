@@ -6,5 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-         titre=${{ github.event.head_commit.message }}
+         titre=$TITRE
          echo Hello World !
+        env:
+          TITRE: ${{ github.event.head_commit.message }}
