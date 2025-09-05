@@ -5,33 +5,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Install nodeJs
-        uses: actions/setup-node@v4
-      - name: init cache
-        uses: actions/cache@v4
-        with:
-          key: ${{ runner.os }}-${{ hashFiles('./vite-project/package-lock.json') }}
-          path: ./vite-project/.npm
-      - name: Install dependencies
-        working-directory: ./vite-project
-        run: npm ci --cache .npm --prefer-offline
-      - name: Build application
-        working-directory: ./vite-project
-        run: npm run build
-      - uses: actions/upload-artifact@v4
-        with:
-          name: build
-          path: ./vite-project/dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/upload-artifact@v4
-        with:
-          name: build
-          path: ./build
       - run: |
-          ls
-          ls build
+         titre=${{ github.event.head_commit.message }}
+         echo Hello World !
