@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo 123> test.txt
-      - uses: actions/uploaft-artifact@v3
+      - uses: actions/upload-artifact@v3
         with:
           name: myfirstartifact
           path: ./test.txt
