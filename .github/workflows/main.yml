@@ -10,3 +10,15 @@ jobs:
         with:
           name: myfirstartifact
           path: ./test.txt
+  downloadartifact:
+    needs: testartifact
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/upload-artifact@v4
+        with:
+          name: myfirstartifact
+          path: ./ici
+      - run: |
+          ls
+          ls ./ici
+          cat ./ici/test.txt
